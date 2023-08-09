@@ -15,7 +15,7 @@ Nginx or Apache (recommended) http server
 
 ## Installation
 
-1. Unzip the Download file from Codecanyon. You will find two folders, one folder contains Documentation & another is Application Files.
+1. Unzip the Download or clone project. You will find two folders, one folder contains Documentation & another is Application Files.
 
 2. Upload the entire Application Files folder to your website or server.
 
