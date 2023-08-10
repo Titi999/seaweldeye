@@ -10,10 +10,11 @@ namespace App\Http\Controllers;
 use DB;
 use Carbon\Carbon;
 use App\Classes\table;
-use App\Classes\permission;
 use App\Http\Requests;
+use App\Classes\permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ClockController extends Controller
 {
@@ -31,22 +32,22 @@ class ClockController extends Controller
 
     public function add(Request $request)
     {
+        $idno = Auth::user()->idno;
 
-        if ($request->idno == NULL || $request->type == NULL) 
+        if ($idno == NULL || $request->type == NULL) 
         {
             return response()->json([
-                "error" => trans("Please enter your ID.")
+                "error" => trans("Please login in to clock your account.")
             ]);
         }
 
-        if(strlen($request->idno) >= 20 || strlen($request->type) >= 20) 
+        if(strlen($idno) >= 20 || strlen($request->type) >= 20) 
         {
             return response()->json([
-                "error" => trans("Invalid Employee ID.")
+                "error" => trans("Please login in to clock your account.")
             ]);
         }
 
-        $idno = strtoupper($request->idno);
         $type = $request->type;
         $date = date('Y-m-d');
         $time = date('h:i:s A');

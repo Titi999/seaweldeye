@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 /*
 * Workday - A time clock application for employees
 * Email: official.codefactor@gmail.com

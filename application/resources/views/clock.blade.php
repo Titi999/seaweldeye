@@ -23,14 +23,14 @@
                     <form action="" method="get" accept-charset="utf-8" class="ui form">
                         @isset($cc)
                             @if($cc == "on") 
-                                <div class="inline field comment">
-                                    <textarea name="comment" class="uppercase lightblue" rows="1" placeholder="Enter comment" value=""></textarea>
-                                </div> 
+                            <div class="inline field comment">
+                                <textarea name="comment" class="uppercase lightblue" rows="1" placeholder="Enter comment" value=""></textarea>
+                            </div> 
                             @endif
-                        @endisset
+                            @endisset
                         <div class="inline field">
-                            <input @if($rfid == 'on') id="rfid" @endif class="enter_idno uppercase @if($rfid == 'on') mr-0 @endif" name="idno" value="" type="text" placeholder="{{ __("ENTER YOUR ID") }}" required autofocus>
-
+                            <!-- <input @if($rfid == 'on') id="rfid" @endif class="enter_idno uppercase @if($rfid == 'on') mr-0 @endif" name="idno" value="" type="text" placeholder="{{ __("ENTER YOUR ID") }}" required autofocus> -->
+                            
                             @if($rfid !== "on")
                                 <button id="btnclockin" type="button" class="ui positive large icon button">{{ __("Confirm") }}</button>
                             @endif
@@ -102,15 +102,17 @@
         var url, type, idno, comment;
         url = $("#_url").val();
         type = $('.btnclock.active').data("type");
-        idno = $('input[name="idno"]').val();
-        idno.toUpperCase();
+        // idno = $('input[name="idno"]').val();
+        // idno.toUpperCase();
         comment = $('textarea[name="comment"]').val();
 
         setTimeout(() => {
             $(this).val("");
         }, 600);
 
-        $.ajax({ url: url + '/attendance/add', type: 'post', dataType: 'json', data: {idno: idno, type: type, clockin_comment: comment}, headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+        $.ajax({ url: url + '/attendance/add', type: 'post', dataType: 'json', data: {
+            // idno: idno, 
+            type: type, clockin_comment: comment}, headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
 
             success: function(response) {
                 if(response['error'] != null) 
@@ -147,12 +149,14 @@
         var url, type, idno, comment;
         url = $("#_url").val();
         type = $('.btnclock.active').data("type");
-        idno = $('input[name="idno"]').val();
-        idno.toUpperCase();
+        // idno = $('input[name="idno"]').val();
+        // idno.toUpperCase();
         comment = $('textarea[name="comment"]').val();
 
         $.ajax({
-            url: url + '/attendance/add',type: 'post',dataType: 'json',data: {idno: idno, type: type, clockin_comment: comment},headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
+            url: url + '/attendance/add',type: 'post',dataType: 'json',data: {
+                // idno: idno,
+                 type: type, clockin_comment: comment},headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') },
 
             success: function(response) {
                 if(response['error'] != null) 
